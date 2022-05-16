@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use \App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,22 @@ use App\Models\User;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/users', function () {
 
-Route::get('/', function () {
-
-    $users = \App\Models\User::all();
+    $users = User::all();
 
     return view('users', ['users' => $users]);
 });
+Route::get('/', function () {
+
+    return view('posts', ['posts' => Post::all()]);
+});
+
+Route::get('/posts/{post}', function ($id) {
+
+    $post = Post::findOrFail($id);
+
+    return view('post', ['post' => $post]);
+});
+
+
