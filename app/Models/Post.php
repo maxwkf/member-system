@@ -10,8 +10,16 @@ class Post extends Model
 {
     use HasFactory;
 
-    public static function findOrFail($id) {
-        $post = static::find($id);
+    public static function findOrFail($key) {
+
+        $post = (function() use ($key) {
+            if (is_numeric($key)) {
+                return static::find($key);
+            } else {
+                return static::where('slug', $key)->first();
+            }
+        })();
+
         if (!$post) {
             throw new ModelNotFoundException();
         }
