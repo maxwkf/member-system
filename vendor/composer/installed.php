@@ -1,7 +1,7 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'v9.1.8',
-        'version' => '9.1.8.0',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -358,6 +358,15 @@
                 0 => 'v9.12.2',
             ),
         ),
+        'itsgoingd/clockwork' => array(
+            'pretty_version' => 'v5.1.6',
+            'version' => '5.1.6.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../itsgoingd/clockwork',
+            'aliases' => array(),
+            'reference' => '9df41432da1d8cb39c7fda383ddcc02231c83ff3',
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -374,8 +383,8 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'v9.1.8',
-            'version' => '9.1.8.0',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -736,8 +745,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(
