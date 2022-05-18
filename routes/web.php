@@ -38,7 +38,10 @@ Route::get('/', function () {
     //     logger($query->sql, $query->bindings);
     // });
     
-    return view('posts', ['posts' => Post::with('category')->with('author')->get()]);
+    return view('posts', [
+        'posts' => Post::with('category')->with('author')->get(),
+        'categories' => Category::all()
+    ]);
 });
 
 Route::get('posts/{post:slug}', function (Post $post) {
@@ -48,7 +51,11 @@ Route::get('posts/{post:slug}', function (Post $post) {
 
 Route::get('categories/{category:slug}', function (Category $category) {
 
-    return view('posts', ['posts' => $category->posts]);
+    return view('posts', [
+        'posts' => $category->posts,
+        'currentCategory' => $category,
+        'categories' => Category::all()
+    ]);
 });
 
 Route::get('authors/{user}', function (User $user) {
@@ -75,5 +82,8 @@ Route::get('authors/{user}', function (User $user) {
      * Method 3: better way to resolve N + 1 Problem
      * 
      */
-    return view('posts', ['posts' => $user->posts->load(['category', 'author'])]);
+    return view('posts', [
+        'posts' => $user->posts->load(['category', 'author']),#,
+        'categories' => Category::all()
+    ]);
 });
