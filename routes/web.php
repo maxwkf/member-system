@@ -49,5 +49,9 @@ Route::get('categories/{category:slug}', function (Category $category) {
 
 Route::get('authors/{user}', function (User $user) {
 
-    return view('posts', ['posts' => $user->posts]);
+    // this will cause N + 1 Problem
+    // return view('posts', ['posts' => $user->posts]);
+    
+    // eager loading for category and author
+    return view('posts', ['posts' => Post::with('category', 'author')->where('user_id', $user->id)->orderBy('created_at', 'desc')->get()]);
 });
