@@ -29,11 +29,15 @@ Route::get('/users', function () {
 });
 Route::get('/', function () {
 
+    /**
+     * 
+     * Doing some logging if necessary, we have used clockwork to replace the db log here already
+     * 
+     */
     // DB::listen(function($query) {
     //     logger($query->sql, $query->bindings);
     // });
     
-    // return view('posts', ['posts' => Post::all()]);
     return view('posts', ['posts' => Post::with('category')->with('author')->get()]);
 });
 
@@ -49,9 +53,27 @@ Route::get('categories/{category:slug}', function (Category $category) {
 
 Route::get('authors/{user}', function (User $user) {
 
-    // this will cause N + 1 Problem
-    // return view('posts', ['posts' => $user->posts]);
+    /**
+     *
+     * Method 1: this will cause N + 1 Problem
+     * 
+     * return view('posts', ['posts' => $user->posts]);
+     * 
+     */
     
-    // eager loading for category and author
-    return view('posts', ['posts' => Post::with('category', 'author')->where('user_id', $user->id)->orderBy('created_at', 'desc')->get()]);
+    /**
+     *
+     * Method 2: eager loading for category and author
+     * 
+     * return view('posts', ['posts' => Post::with('category', 'author')->where('user_id', $user->id)->orderBy('created_at', 'desc')->get()]);
+     * 
+     */
+    // 
+
+    /**
+     *
+     * Method 3: better way to resolve N + 1 Problem
+     * 
+     */
+    return view('posts', ['posts' => $user->posts->load(['category', 'author'])]);
 });
