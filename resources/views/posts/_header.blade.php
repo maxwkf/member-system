@@ -14,44 +14,7 @@
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
         <!--  Category -->
         <div class="relative lg:inline-flex bg-gray-100 rounded-xl">
-
-            <x-dropdown>
-                <x-slot name="trigger">
-                    <button
-                        class="py-2 pl-3 pr-9 text-sm font-semibold w-full lg:w-32 text-left flex lg:inline-flex"
-                    >
-                        {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Categories' }}
-
-                        <x-icon name="down-arrow" />
-                    </button>
-                </x-slot>
-
-                {{-- 
-                   - Using routeIs need to set alias in web.php for corresponding route
-                   - 
-                --}}
-                <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
-
-                @foreach ($categories as $category)
-                
-                    {{-- 
-                       - Active can be check by the followings
-                       - 
-                       - 1. Check by variable
-                       -    :active="isset($currentCatetory) && $currentCategory->is($category)"    
-                       -
-                       - 2. Check by URI
-                       -    :active="request()->is('categories/' . $category->slug)"
-                    --}}
-                    <x-dropdown-item
-                        href="/categories/{{ $category->slug }}"
-                        :active='request()->is("categories/{$category->slug}")'
-                    >{{ ucwords($category->name) }}
-                    </x-dropdown-item>
-
-                @endforeach
-            </x-dropdown>
-
+            <x-category-dropdown />
         </div>
 
         <!-- Other Filters -->

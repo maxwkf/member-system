@@ -91,7 +91,7 @@ Route::get('/users', function () {
 
 
 
-Route::get('authors/{user}', function (User $user) {
+Route::get('authors/{author:name}', function (User $author) {
 
     /**
      *
@@ -116,7 +116,7 @@ Route::get('authors/{user}', function (User $user) {
      * 
      */
     return view('posts', [
-        'posts' => $user->posts->load(['category', 'author']),#,
+        'posts' => $author->posts->load(['category', 'author']),#,
         'categories' => Category::all()
     ]);
 });
