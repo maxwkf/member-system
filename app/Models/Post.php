@@ -5,19 +5,45 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model
 {
     use HasFactory;
 
-    public function scopeFilter($query, $filter) {
+    public function scopeFilter(Builder $query, $filter) {
 
-        return $query->when( $filter['search'] ?? false, fn($query, $search) =>
+        $query->when( $filter['search'] ?? false, fn($query, $search) =>
             $query
                 ->where('title', 'like', '%' . $search . '%')
                 ->orWhere('body', 'like', '%' . $search . '%')
         );
 
+
+        /**
+         * 
+         * Method 1: Using WhereExists
+         * 
+         */
+        // $query->when( $filter['category'] ?? false, fn($query, $category) =>
+        //     $query
+        //         ->whereExists(fn($query) =>
+        //             $query->from('categories')
+        //                 ->whereColumn('categories.id', 'posts.category_id')
+        //                 ->where('categories.slug', $category)
+        //         )
+        // );
+
+        /**
+         * 
+         * Method 2: Using WhereHas
+         * 
+         */
+        $query->when( $filter['category'] ?? false, fn($query, $category) =>
+            $query->whereHas( 'category', fn(Builder $query) => $query->where('slug', $category) )
+        );
+
+        return $query;
     }
 
     public static function findOrFail($key) {

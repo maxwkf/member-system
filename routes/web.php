@@ -63,7 +63,22 @@ Route::get('/', [PostController::class, 'index']);
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 
+/**
+ * Previous Approach
+ */
+// Route::get('categories/{category:slug}', function (Category $category) {
 
+//     return view('posts', [
+//         'posts' => $category->posts,
+//         'currentCategory' => $category,
+//         'categories' => Category::all()
+//     ]);
+// })->name('category');
+
+/**
+ * Current Approach
+ */
+// replaced by PostController::index(), there is a search function inside with category filters
 
 
 
@@ -74,14 +89,7 @@ Route::get('/users', function () {
     return view('users', ['users' => $users]);
 });
 
-Route::get('categories/{category:slug}', function (Category $category) {
 
-    return view('posts', [
-        'posts' => $category->posts,
-        'currentCategory' => $category,
-        'categories' => Category::all()
-    ]);
-})->name('category');
 
 Route::get('authors/{user}', function (User $user) {
 
