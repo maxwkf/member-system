@@ -10,6 +10,16 @@ class Post extends Model
 {
     use HasFactory;
 
+    public function scopeFilter($query, $filter) {
+
+        return $query->when( $filter['search'] ?? false, fn($query, $search) =>
+            $query
+                ->where('title', 'like', '%' . $search . '%')
+                ->orWhere('body', 'like', '%' . $search . '%')
+        );
+
+    }
+
     public static function findOrFail($key) {
 
         $post = (function() use ($key) {

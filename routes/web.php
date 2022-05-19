@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Queue\Listener;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,32 +22,56 @@ use Illuminate\Support\Facades\DB;
 // Route::get('/', function () {
 //     return view('default');
 // });
+
+/**
+ * Previous Approach
+ */
+// Route::get('/', function () {
+
+//     /**
+//      * 
+//      * Doing some logging if necessary, we have used clockwork to replace the db log here already
+//      * 
+//      */
+//     // DB::listen(function($query) {
+//     //     logger($query->sql, $query->bindings);
+//     // });
+    
+//     return view('posts', [
+//         'posts' => Post::latest()->with('category')->with('author')->get(),
+//         'categories' => Category::all()
+//     ]);
+// })->name('home');
+
+/**
+ * Current Approach
+ */
+Route::get('/', [PostController::class, 'index']);
+
+
+/**
+ * Previous Approach
+ */
+// Route::get('posts/{post:slug}', function (Post $post) {
+
+//     return view('post', ['post' => $post]);
+// });
+
+/**
+ * Current Approach
+ */
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
+
+
+
+
+
+
 Route::get('/users', function () {
 
     $users = User::all();
 
     return view('users', ['users' => $users]);
-});
-Route::get('/', function () {
-
-    /**
-     * 
-     * Doing some logging if necessary, we have used clockwork to replace the db log here already
-     * 
-     */
-    // DB::listen(function($query) {
-    //     logger($query->sql, $query->bindings);
-    // });
-    
-    return view('posts', [
-        'posts' => Post::latest()->with('category')->with('author')->get(),
-        'categories' => Category::all()
-    ]);
-})->name('home');
-
-Route::get('posts/{post:slug}', function (Post $post) {
-
-    return view('post', ['post' => $post]);
 });
 
 Route::get('categories/{category:slug}', function (Category $category) {

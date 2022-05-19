@@ -12,6 +12,8 @@
                     @endforeach
                 </div>
             @endif
+        @else
+            <p class="w-full text-center text-lg">There are no matched posts.</p>
         @endif
     </main>
 </x-layout>
