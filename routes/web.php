@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Queue\Listener;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,3 +127,6 @@ Route::get('/users', function () {
  * Current Approach
  */
 // replaced by PostController::index(), there is a search function inside with category filters
+Route::get('/register', [RegisterController::class, 'create']);
+
+Route::post('/register', [RegisterController::class, 'store']);
