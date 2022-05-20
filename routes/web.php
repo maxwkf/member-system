@@ -90,33 +90,39 @@ Route::get('/users', function () {
 });
 
 
+/**
+ * Previous Approach
+ */
+// Route::get('authors/{author:username}', function (User $author) {
 
-Route::get('authors/{author:name}', function (User $author) {
-
-    /**
-     *
-     * Method 1: this will cause N + 1 Problem
-     * 
-     * return view('posts', ['posts' => $user->posts]);
-     * 
-     */
+//     /**
+//      *
+//      * Method 1: this will cause N + 1 Problem
+//      * 
+//      * return view('posts', ['posts' => $user->posts]);
+//      * 
+//      */
     
-    /**
-     *
-     * Method 2: eager loading for category and author
-     * 
-     * return view('posts', ['posts' => Post::with('category', 'author')->where('user_id', $user->id)->orderBy('created_at', 'desc')->get()]);
-     * 
-     */
-    // 
+//     /**
+//      *
+//      * Method 2: eager loading for category and author
+//      * 
+//      * return view('posts', ['posts' => Post::with('category', 'author')->where('user_id', $user->id)->orderBy('created_at', 'desc')->get()]);
+//      * 
+//      */
+//     // 
 
-    /**
-     *
-     * Method 3: better way to resolve N + 1 Problem
-     * 
-     */
-    return view('posts', [
-        'posts' => $author->posts->load(['category', 'author']),#,
-        'categories' => Category::all()
-    ]);
-});
+//     /**
+//      *
+//      * Method 3: better way to resolve N + 1 Problem
+//      * 
+//      */
+//     return view('posts', [
+//         'posts' => $author->posts->load(['category', 'author']),#,
+//         'categories' => Category::all()
+//     ]);
+// });
+/**
+ * Current Approach
+ */
+// replaced by PostController::index(), there is a search function inside with category filters

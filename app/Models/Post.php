@@ -43,7 +43,10 @@ class Post extends Model
             $query->whereHas( 'category', fn(Builder $query) => $query->where('slug', $category) )
         );
 
-        return $query;
+        $query->when( $filter['author'] ?? false, fn($query, $author) =>
+            $query->whereHas( 'author', fn(Builder $query) => $query->where('username', $author) )
+        );
+
     }
 
     public static function findOrFail($key) {
