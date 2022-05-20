@@ -24,7 +24,9 @@ class RegisterController extends Controller
             'password' => ['required', 'max:255'],
         ]);
 
-        User::create($attributes);
+        $user = User::create($attributes);
+
+        auth()->login($user);
 
         /**
          * Method 1 of doing flash session message

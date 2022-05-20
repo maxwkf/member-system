@@ -8,6 +8,7 @@ use Illuminate\Queue\Listener;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,6 +128,13 @@ Route::get('/users', function () {
  * Current Approach
  */
 // replaced by PostController::index(), there is a search function inside with category filters
-Route::get('/register', [RegisterController::class, 'create']);
+Route::get('/register', [RegisterController::class, 'create'])->middleware('guest');
 
-Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+
+
+Route::get('/login', [SessionsController::class, 'create'])->middleware('guest');
+
+Route::post('/login', [SessionsController::class, 'store'])->middleware('guest');
+
+Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
