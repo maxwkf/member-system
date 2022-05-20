@@ -10,10 +10,27 @@ class PostController extends Controller
 {
     public function index() {
 
-        return view('posts.index', [
-            'posts' => Post::latest()->filter(request()->only('search', 'category', 'author'))->get()
-        ]);
+        /**
+         * Normal
+         */
+        // return view('posts.index', [
+        //     'posts' => Post::latest()->filter(request()->only('search', 'category', 'author'))->get()
+        // ]);
 
+
+        /**
+         * JSON
+         */
+        // return Post::latest()->filter(request()->only('search', 'category', 'author'))->get();
+
+        /**
+         * Paginated
+         */
+        return view('posts.index', [
+            'posts' => Post::latest()
+                ->filter(request()->only('search', 'category', 'author'))
+                ->paginate(3)->withQueryString()
+        ]);
     }
 
     public function show(Post $post) {
