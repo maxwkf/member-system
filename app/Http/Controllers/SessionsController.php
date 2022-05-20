@@ -24,6 +24,9 @@ class SessionsController extends Controller
 
         // user authentication
         if (auth()->attempt($attributes)) {
+            // prevent session fixation attacks
+            session()->regenerate();
+
             // redirect and success
             return redirect('/')->with('success', 'Welcome back!');
         }
@@ -31,9 +34,9 @@ class SessionsController extends Controller
         /**
          * Method 1: using return error
          */
-        return back()
-                ->withInput()
-                ->withErrors(['email' => 'Your provided credentials count not be verified.']);
+        // return back()
+        //         ->withInput()
+        //         ->withErrors(['email' => 'Your provided credentials count not be verified.']);
 
          /**
           * Method 2: throw validation exception
