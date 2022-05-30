@@ -9,19 +9,19 @@ class Category extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = ['id'];
+    // /**
+    //  * The attributes that aren't mass assignable.
+    //  *
+    //  * @var array
+    //  */
+    // protected $guarded = ['id'];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['slug', 'name'];
+    // /**
+    //  * The attributes that are mass assignable.
+    //  *
+    //  * @var array
+    //  */
+    // protected $fillable = ['slug', 'name'];
 
     public function posts() {
         return $this->hasMany(Post::class);

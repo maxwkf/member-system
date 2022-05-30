@@ -1,11 +1,9 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PostCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
-use App\Models\Post;
-use App\Models\Category;
-use Illuminate\Queue\Listener;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -20,6 +18,9 @@ use App\Http\Controllers\SessionsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// index, show, create, store, edit, update, destroy
+
 
 // Route::get('/', function () {
 //     return view('default');
@@ -63,6 +64,9 @@ Route::get('/', [PostController::class, 'index']);
  * Current Approach
  */
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
+
+
+Route::post('posts/{post:slug}/comment', [PostCommentController::class, 'store']);
 
 
 /**
@@ -138,3 +142,5 @@ Route::get('/login', [SessionsController::class, 'create'])->middleware('guest')
 Route::post('/login', [SessionsController::class, 'store'])->middleware('guest');
 
 Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
+Route::post('newsletter', NewsletterController::class);

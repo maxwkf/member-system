@@ -11,7 +11,9 @@
                 <div class="flex items-center lg:justify-center text-sm mt-4">
                     <img src="/images/lary-avatar.svg" alt="Lary avatar">
                     <div class="ml-3 text-left">
-                        <a href="/?author={{ $post->author->username }}"><h5 class="font-bold">{{ $post->author->name }}</h5></a>
+                        <a href="/?author={{ $post->author->username }}">
+                            <h5 class="font-bold">{{ $post->author->name }}</h5>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -32,7 +34,7 @@
 
                         Back to Posts
                     </a>
-                    
+
                     <x-category-button :category="$post->category" />
                 </div>
 
@@ -44,6 +46,22 @@
                     {!! $post->body !!}
                 </div>
             </div>
+
+
+            <section class="col-start-5 col-span-8 pt-10 space-y-4">
+                @auth
+                    @include('posts._add-comment-form')
+                @else
+                    <p><a href="/register" class="hover:underline">Register</a> or <a href="/login" class="hover:underline">Log in</a> to leave comment</p>
+                @endauth
+            </section>
+
+
+            <section class="col-start-5 col-span-8 pt-10 space-y-4">
+                @foreach ($post->comments as $comment)
+                    <x-comment :comment='$comment' />
+                @endforeach
+            </section>
         </article>
     </main>
 </x-layout>
