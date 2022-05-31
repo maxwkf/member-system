@@ -2,7 +2,7 @@
 
     <x-panel>
         <h1 class="text-center font-bold text-xl">Make a Post</h1>
-        <form method="post" action="/admin/posts">
+        <form method="post" action="/admin/posts" enctype="multipart/form-data">
             @csrf
             <div class="mb-6">
                 <label for="title" class="block mb-2 uppercase font-bold text-xs text-gray-700">Title</label>
@@ -28,6 +28,14 @@
                     @endforeach
                 </select>
                 @error('category_id')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-6">
+                <label for="thumbnail" class="block mb-2 uppercase font-bold text-xs text-gray-700">Excerpt</label>
+                <input type="file" name="thumbnail" id="thumbnail" class="border border-gray-400 p-2 w-full" value="{{ old("excerpt") }}" />
+                @error('thumbnail')
                     <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                 @enderror
             </div>

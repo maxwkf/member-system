@@ -47,11 +47,13 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'slug' => ['required', Rule::unique('posts', 'slug'), 'max:255'],
             'excerpt' => 'required|max:255',
+            'thumbnail' => 'required|image',
             'body' => 'required',
-            'category_id' => 'required|integer'
+            'category_id' => ['required', Rule::exists('categories', 'id')],
         ]);
 
         $attributes['user_id'] = auth()->user()->id;
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
         Post::create($attributes)->save();
 
