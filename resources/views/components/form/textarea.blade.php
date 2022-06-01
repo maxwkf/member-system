@@ -4,7 +4,12 @@
 
     <x-form.label name="{{ $name }}" />
     
-    <textarea name="{{ $name }}" id="{{ $name }}" class="border border-gray-400 p-2 w-full">{{ old($name) }}</textarea>
+    <textarea
+        name="{{ $name }}"
+        id="{{ $name }}"
+        class="border border-gray-400 p-2 w-full"
+        {{ $attributes }}
+        >{{ $slot ?? old($name) }}</textarea>
     
     <x-form.error name="{{ $name }}" />
 
