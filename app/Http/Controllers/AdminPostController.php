@@ -15,23 +15,19 @@ class AdminPostController extends Controller
         ]);
     }
 
-    public function create(Post $post) {
-        
-        $attributes = request()->validate([
-            'title' => 'required|max:255',
-            'slug' => ['required', Rule::unique("posts", "slug")],
-            'excerpt' => 'required|max:255',
-            'thumbnail' => 'image',
-            'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-        ]);
+    public function create() {
+        return view('posts.create');
+    }
 
-        $attributes['user_id'] = auth()->user()->id;
-        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+    public function store() {
+        $attributes = array_merge($this->validatePost(),[
+            'user_id' => auth()->user()->id,
+            'thumbnail' => request()->file('thumbnail')->store('thumbnails'),
+        ]);
 
         Post::create($attributes)->save();
 
-        return back()->with("success", "Post is updated");
+        return redirect("/")->with("success", "Post is created successfully");
     }
 
     public function edit(Post $post) {
@@ -41,19 +37,10 @@ class AdminPostController extends Controller
 
     public function update(Post $post) {
 
-
-        
-        $attributes = request()->validate([
-            'title' => 'required|max:255',
-            'slug' => ['required', Rule::unique("posts", "slug")->ignore($post->id)],
-            'excerpt' => 'required|max:255',
-            'thumbnail' => 'image',
-            'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-        ]);
+        $attributes = $this->validatePost($post);
 
         $attributes['user_id'] = auth()->user()->id;
-        if (request()->file('thumbnail')) {
+        if (request('thumbnail') ?? false) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         }
 
@@ -66,5 +53,18 @@ class AdminPostController extends Controller
         $post->delete();
 
         return back()->with("success", "Post deleted.");
+    }
+
+    protected function validatePost(?Post $post = null) {
+        $post ??= new Post();
+
+        return request()->validate([
+            'title' => 'required|max:255',
+            'slug' => ['required', Rule::unique("posts", "slug")->ignore($post->id)],
+            'excerpt' => 'required|max:255',
+            'thumbnail' => $post->exists ? 'image' : 'required|image',
+            'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+        ]);
     }
 }
