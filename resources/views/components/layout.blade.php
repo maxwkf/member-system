@@ -24,8 +24,11 @@
                             <button class="font-bold text-xs uppercase">Welcome, {{ auth()->user()->name }}!</button>
                         </x-slot>
                             
+                        @admin
                         <x-dropdown-item href="#" class="{{ request()->is('admin/dashboard') ? 'bg-blue-500 text-white' : '' }}">Dashboard</x-dropdown-item>
                         <x-dropdown-item href="/admin/posts/create" class="{{ request()->is('admin/posts/create') ? 'bg-blue-500 text-white' : '' }}">New Post</x-dropdown-item>
+                        @endadmin
+                        
                         <x-dropdown-item href="#" @click.prevent="document.getElementById('logout-form').submit()">Log Out</x-dropdown-item>
 
                         <form

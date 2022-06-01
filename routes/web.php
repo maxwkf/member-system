@@ -147,17 +147,26 @@ Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth
 Route::post('newsletter', NewsletterController::class);
 
 
-// Admin
-// Admin - Listing and Show Post
-Route::get('admin/posts', [AdminPostController::class, 'index'])->middleware('admin');
+// // Admin
+// // Admin - Listing and Show Post
+// // Route::get('admin/posts', [AdminPostController::class, 'index'])->middleware('admin');//Using ->middleware('can:admin') in the Route with AppServiceProvide boot configuration.
+// Route::get('admin/posts', [AdminPostController::class, 'index'])->middleware('can:admin');
 
-// Admin - Edit and Update Post
-Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit'])->middleware('admin');
-Route::patch('admin/posts/{post}', [AdminPostController::class, 'update'])->middleware('admin');
 
-// Admin - Create and Store Post
-Route::get('admin/posts/create', [AdminPostController::class, 'create'])->middleware('admin');
-Route::post('admin/posts', [AdminPostController::class, 'store'])->middleware('admin');
+// // Admin - Edit and Update Post
+// Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit'])->middleware('admin');
+// Route::patch('admin/posts/{post}', [AdminPostController::class, 'update'])->middleware('admin');
 
-// Admin - Delete Post
-Route::delete('admin/posts/{post}', [AdminPostController::class, 'destroy'])->middleware('admin');
+// // Admin - Create and Store Post
+// Route::get('admin/posts/create', [AdminPostController::class, 'create'])->middleware('admin');
+// Route::post('admin/posts', [AdminPostController::class, 'store'])->middleware('admin');
+
+// // Admin - Delete Post
+// Route::delete('admin/posts/{post}', [AdminPostController::class, 'destroy'])->middleware('admin');
+
+
+
+
+Route::middleware('can:admin')->group(function() {
+    Route::resource('admin/posts', AdminPostController::class)->except('show');
+});
