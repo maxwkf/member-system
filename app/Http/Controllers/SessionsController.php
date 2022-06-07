@@ -18,7 +18,7 @@ class SessionsController extends Controller
 
         // validation
         $attributes = request()->validate([
-            'email' => 'required|email|exists:users,email',
+            'username' => 'required|exists:users,username',
             'password' => 'required'
         ]);
 

@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::all()->each(function (\App\Models\User $user) use ($roles) {
             $user->roles()->attach(
-                array_merge( $roles->random(rand(1, 3))->pluck('slug')->toArray(), ['member'] )
+                [ $roles->where('id', rand(1, 3))->first()->slug, 'member']
             );
         });
 
