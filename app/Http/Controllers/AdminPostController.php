@@ -25,7 +25,7 @@ class AdminPostController extends Controller
             'thumbnail' => request()->file('thumbnail')->store('thumbnails'),
         ]);
 
-        Post::create($attributes)->save();
+        Post::create($attributes);
 
         return redirect("/")->with("success", "Post is created successfully");
     }

@@ -12,6 +12,8 @@
                 <li><a href="/admin/posts/create" class="{{ request()->is('admin/posts/create') ? 'text-blue-500 font-bold' : '' }}">New Post</a></li>
                 <li><a href="/admin/roles" class="{{ request()->is('admin/roles') ? 'text-blue-500 font-bold' : '' }}">All Roles</a></li>
                 <li><a href="/admin/roles/create" class="{{ request()->is('admin/roles/create') ? 'text-blue-500 font-bold' : '' }}">New Role</a></li>
+                <li><a href="/admin/users" class="{{ request()->is('admin/roles') ? 'text-blue-500 font-bold' : '' }}">All Users</a></li>
+                <li><a href="/admin/users/create" class="{{ request()->is('admin/users/create') ? 'text-blue-500 font-bold' : '' }}">New User</a></li>
             </ul>
         </aside>
         {{ $slot }}

@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             "admin" => "Administrator",
             "editor" => "Editor",
             "asset-manager" => "Asset Manager",
+            "member" => "Member",
         ])->each(function($name, $slug) {
             
             (new \App\Models\Role())->create([
@@ -43,7 +44,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::all()->each(function (\App\Models\User $user) use ($roles) {
             $user->roles()->attach(
-                $roles->random(rand(1, 3))->pluck('slug')->toArray()
+                array_merge( $roles->random(rand(1, 3))->pluck('slug')->toArray(), ['member'] )
             );
         });
 
@@ -62,7 +63,7 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => 'rootroot', // password
             'remember_token' => Str::random(10),
-        ])->roles()->attach('admin');
+        ])->roles()->attach(['member','admin']);
 
         $name = 'Max Editor';
         \App\Models\User::create([
@@ -72,7 +73,7 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => 'rootroot', // password
             'remember_token' => Str::random(10),
-        ])->roles()->attach('editor');
+        ])->roles()->attach(['member','editor']);
 
         $name = 'Max Asset Manager';
         \App\Models\User::create([
@@ -82,6 +83,6 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => 'rootroot', // password
             'remember_token' => Str::random(10),
-        ])->roles()->attach('asset-manager');
+        ])->roles()->attach(['member','asset-manager']);
     }
 }

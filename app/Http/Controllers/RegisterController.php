@@ -26,6 +26,8 @@ class RegisterController extends Controller
 
         $user = User::create($attributes);
 
+        $user->roles()->attach('member');
+
         auth()->login($user);
 
         /**
