@@ -57,5 +57,20 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany(Post::class);
     }
+
+    public function roles() {
+        // dd($this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_slug',null,'role_slug')->toSql());
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_slug',null,'slug');
+    }
+
+    public function hasRoles($roles = []) {
+        return $this->roles()->where('slug',
+            is_array($roles) ? $roles : [$roles]
+        )->exists();
+    }
+
+    public function hasRole($role) {
+        return $this->hasRoles($role);
+    }
     
 }

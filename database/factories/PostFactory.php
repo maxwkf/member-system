@@ -19,13 +19,15 @@ class PostFactory extends Factory
     public function definition()
     {
         
-        $user = (function() {
-            if (User::count() == 0 || rand(0,100) % 4 == 0) {
-                return User::factory()->create();
-            } else {
-                return User::all()->sortDesc()->first();
-            }
-        })();
+        // $user = (function() {
+        //     if (User::count() == 0 || rand(0,100) % 4 == 0) {
+        //         return User::factory()->create();
+        //     } else {
+        //         return User::all()->sortDesc()->first();
+        //     }
+        // })();
+
+        $user = \App\Models\User::all()->random(1)->first();
 
         $category = (function() {
             if (Category::count() == 0 || rand(0,100) % 4 == 0) {

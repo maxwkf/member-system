@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('admin', function (User $user) {
             
-            return $user?->email === 'max@cambridgecreative.co';
+            return $user?->hasRole('admin');
 
         });
 

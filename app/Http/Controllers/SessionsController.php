@@ -43,7 +43,7 @@ class SessionsController extends Controller
           */
         // throw if not authenticated
         throw ValidationException::withMessages([
-            'email' => 'Your provided credentials count not be verified.'
+            'email' => 'Your provided credentials could not be verified.'
         ]);
 
     }

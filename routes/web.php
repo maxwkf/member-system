@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPostController;
+use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostCommentController;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,7 @@ use App\Models\User;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use Symfony\Component\VarDumper\VarDumper;
 
 /*
 |--------------------------------------------------------------------------
@@ -169,4 +171,12 @@ Route::post('newsletter', NewsletterController::class);
 
 Route::middleware('can:admin')->group(function() {
     Route::resource('admin/posts', AdminPostController::class)->except('show');
+    Route::resource('admin/roles', AdminRoleController::class)->except('show');
 });
+
+
+Route::get('/checkrole', function() {
+    $user = User::find(2);
+    dd($user->hasRole('editor'));
+});
+

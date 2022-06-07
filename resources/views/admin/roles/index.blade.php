@@ -1,24 +1,24 @@
 <x-layout>
-    <x-setting heading="Manage Posts">
-        <x-list>
-            @foreach ($posts as $post)
+    <x-setting heading="Manage Roles">
+        <x-list :headings="['Name', '', '']">
+            @foreach ($roles as $role)
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
                             <div class="text-sm font-medium text-gray-900">
-                                <a href="/posts/{{ $post->slug }}">
-                                    {{ $post->title }}
+                                <a href="/roles/{{ $role->slug }}">
+                                    {{ $role->name }}
                                 </a>
                             </div>
                         </div>
                     </td>
 
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/admin/posts/{{ $post->id }}/edit" class="text-blue-500 hover:text-blue-600">Edit</a>
+                        <a href="/admin/roles/{{ $role->id }}/edit" class="text-blue-500 hover:text-blue-600">Edit</a>
                     </td>
 
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <form method="POST" action="/admin/posts/{{ $post->id }}">
+                        <form method="role" action="/admin/roles/{{ $role->id }}">
                             @csrf
                             @method('DELETE')
 
