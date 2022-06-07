@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\NewsletterController;
@@ -170,6 +171,7 @@ Route::post('newsletter', NewsletterController::class);
 
 
 Route::middleware('can:admin')->group(function() {
+    Route::get('admin', [AdminController::class, 'index']);
     Route::resource('admin/posts', AdminPostController::class)->except('show');
     Route::resource('admin/roles', AdminRoleController::class)->except('show');
 });

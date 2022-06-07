@@ -1,6 +1,6 @@
 <x-layout>
     <x-setting heading="Manage Posts">
-        <x-list>
+        <x-list :headings="['Excerpt', '', '']">
             @foreach ($posts as $post)
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap">

@@ -1,6 +1,4 @@
 <x-layout>
-
-
     <x-setting :heading="'Edit Post: ' . $post->title">
         <div class="flex-1">
             <x-panel>

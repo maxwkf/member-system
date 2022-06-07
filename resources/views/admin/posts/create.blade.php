@@ -1,6 +1,4 @@
 <x-layout>
-
-
     <x-setting heading="Create New Post">
         <div class="flex-1">
             <x-panel>
@@ -19,5 +17,4 @@
             </x-panel>
         </div>
     </x-setting>
-    
 </x-layout>
