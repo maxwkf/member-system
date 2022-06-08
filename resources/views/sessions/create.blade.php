@@ -5,8 +5,8 @@
             <form method="post" action="/login" class="mt-10">
                 @csrf
 
-                <x-form.input name="username" />
-                <x-form.input name="password" type="password" />
+                <x-form.input name="username" value="max-admin" />
+                <x-form.input name="password" type="password" value="rootroot" />
                 
                 <x-form.button>Login</x-form.button>    
 

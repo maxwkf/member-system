@@ -6,7 +6,7 @@
                     @csrf
                     <x-form.input name="title" />
                     <x-form.input name="slug" />
-                    <x-form.selection name="category_id" title="Category" :options="\App\Models\Category::all()" />
+                    <x-form.select name="category_id" title="Category" :options="\App\Models\Category::all()" />
                     <x-form.input name="thumbnail" type="file" />
                     <x-form.input name="excerpt" />
                     <x-form.textarea name="body" />

@@ -7,7 +7,7 @@
                     @method("PATCH")
                     <x-form.input name="title" :value="old('title', $post->title)" />
                     <x-form.input name="slug" :value="old('slug', $post->slug)"/>
-                    <x-form.selection name="category_id" title="Category" :options="\App\Models\Category::all()" :value="old('category_id', $post->category_id)" />
+                    <x-form.select name="category_id" title="Category" :options="\App\Models\Category::all()" :value="old('category_id', $post->category_id)" />
 
                     <div class="flex mt-6">
                         <x-form.input name="thumbnail" type="file" class="flex-1" />

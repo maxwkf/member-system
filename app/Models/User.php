@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -41,9 +42,30 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function setPasswordAttribute($password) {
-        $this->attributes['password'] = bcrypt($password);
+    /**
+     * Before Laravel 9.x
+     */
+    // public function setPasswordAttribute($password) {
+    //     $this->attributes['password'] = bcrypt($password);
+    // }
+
+    /**
+     * Laravel 9.x
+     */
+    /**
+     * Interact with the user's password
+     *
+     * @param  string  $value
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => bcrypt($value)
+        );
     }
+
 
     /**
      * The attributes that should be cast.
