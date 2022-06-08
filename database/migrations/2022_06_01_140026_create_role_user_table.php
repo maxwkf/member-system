@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('role_user', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned()->nullable()->index();
+            $table->foreignId('user_id')->unsigned()->nullable()->index()->constrained()->cascadeOnDelete();
             $table->string('role_slug')->nullable()->index();
+            $table->foreign('role_slug')->references('slug')->on('roles')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -41,4 +41,23 @@ class AdminUserTest extends TestCase
         $user = \App\Models\User::find(1);
         $this->assertTrue($user != null);
     }
+
+    public function test_transaction() {
+        $name = 'Test Store User ' . (Carbon::now())->format('Ymd_His');
+        $username = Str::slug($name);
+        
+        $userAttributes = [
+            'name' => $name,
+            'email' => $username . '@ms.com',
+            'username' => $username,
+            'password' => 'rootroot',
+        ];
+        $userRoles = ['jsdfkds'];
+
+        $user = \App\Models\User::create($userAttributes);
+
+        $user->roles()->syncWithoutDetaching($userRoles);
+
+        $this->assertTrue($user->roles()->count() == 1);
+    }
 }

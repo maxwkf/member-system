@@ -45,4 +45,9 @@ class AdminUserController extends Controller
         $user->roles()->syncWithoutDetaching($roles);
         return redirect('/admin/users')->with('success', 'New user created.');
     }
+
+    public function destroy(User $user) {
+        $user->delete();
+        return back()->with('success', 'User deleted');
+    }
 }

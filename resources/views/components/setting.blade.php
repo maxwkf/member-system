@@ -1,10 +1,10 @@
 @props(['heading'])
 
-<section class="py-8 max-w-4xl mx-auto">
+<section class="py-8 max-w-max mx-auto">
     <h1 class="text-center font-bold text-xl pb-10">{{ $heading }}</h1>
 
     <div class="flex">
-        <aside class="w-48">
+        <aside class="flex-0 w-48">
             <p class="font-bold text-xl">Links</p>
             <ul class="pt-4 space-y-2">
                 <li><a href="/admin" class="{{ request()->is('admin') ? 'text-blue-500 font-bold' : '' }}">Dashboard</a></li>
