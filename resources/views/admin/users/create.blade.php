@@ -1,7 +1,6 @@
 <x-layout>
-    <section class="px-6 py-8">
+    <x-setting heading="Create New User">
         <x-panel>
-            <h1 class="text-center font-bold text-xl">Create New User</h1>
             <form method="post" action="/admin/users" class="mt-10">
                 @csrf
                 <x-form.input name="name" />
@@ -23,5 +22,5 @@
 
             </form>
         </x-panel>
-    </section>
+    </x-setting>
 </x-layout>

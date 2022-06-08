@@ -2,7 +2,12 @@
 
 @php
     $title = preg_replace("/\[|\]/", '', $title ?? $name);
-    $selectedOptionId = old($name) ?? $value ?? "";
+    $selectedOptionId = (function() use($name, $value) {
+        $r = [];
+        $r = old($name) ?? $value ?? [];
+        return is_array($r) ? $r : [$r];
+    })();
+    
 @endphp
 
 <x-form.field>
@@ -15,7 +20,7 @@
         {{ $attributes }}
         >
         @foreach($options as $option)
-            <option value="{{ $option->id }}" {{ $option->id == $selectedOptionId ? ' selected="selected"' : '' }}>{{ ucwords($option->name) }}</option>
+            <option value="{{ $option->id }}" {{ in_array($option->id, $selectedOptionId) ? ' selected="selected"' : '' }}>{{ ucwords($option->name) }}</option>
         @endforeach
     </select>
     <x-form.error name="{{ $name }}" />

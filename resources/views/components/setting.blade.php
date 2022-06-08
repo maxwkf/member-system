@@ -1,6 +1,6 @@
 @props(['heading'])
 
-<section class="py-8 max-w-max mx-auto">
+<section class="py-8 w-4/5 mx-auto">
     <h1 class="text-center font-bold text-xl pb-10">{{ $heading }}</h1>
 
     <div class="flex">
@@ -16,6 +16,8 @@
                 <li><a href="/admin/users/create" class="{{ request()->is('admin/users/create') ? 'text-blue-500 font-bold' : '' }}">New User</a></li>
             </ul>
         </aside>
+        <div class="w-full">
         {{ $slot }}
+        </div>
     </div>
 </section>
