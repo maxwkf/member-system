@@ -16,6 +16,8 @@ Change user email `git config user.email [emailaddress]`
 
 Change credential user name `git config credential.username [gitusername]`
 
+Change from HTTPS to SSH (https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
+
 # How to setup in code space
 ! the codespace tries to redirect the form post submission to localhost and hence cannot direct to a correct page
 - Open with code space
