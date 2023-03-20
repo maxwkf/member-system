@@ -1,4 +1,14 @@
+# Setup
+1. Git checkout
+2. Add .env
+3. Composer install
+4. Package install
+5. Run `php artisan migrate`
+6. Run sedder `php artisan db:seed`
+
+
 # How to setup in code space
+! the codespace tries to redirect the form post submission to localhost and hence cannot direct to a correct page
 - Open with code space
 - Install DDEV
 - Currently need to copy the .env file from my own laptop
