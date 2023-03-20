@@ -1,4 +1,5 @@
 # Setup
+## Project Setup
 1. Git checkout
 2. Add .env
 3. Composer install
@@ -6,6 +7,14 @@
 5. Run `php artisan migrate`
 6. Run sedder `php artisan db:seed`
 
+## Git Account
+Show current global config `git config --global --list`.
+
+Show current local config `git config --local --list`.
+
+Change user email `git config user.email [emailaddress]`
+
+Change credential user name `git config credential.username [gitusername]`
 
 # How to setup in code space
 ! the codespace tries to redirect the form post submission to localhost and hence cannot direct to a correct page
