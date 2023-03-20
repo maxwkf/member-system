@@ -1,4 +1,8 @@
 # Setup
+## Setup DDEV
+1. Go to DDEV and install
+2. Use `ddev start` to up the project
+
 ## Project Setup
 1. Git checkout
 2. Add .env
